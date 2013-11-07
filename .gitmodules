@@ -1,3 +1,0 @@
-[submodule "fss"]
-	path = fss
-	url = https://bitbucket.org/sodastsai/flask-static-site.git
