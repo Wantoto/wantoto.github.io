@@ -1,4 +1,7 @@
+/*jshint node:true*/
 /*global module:false*/
+
+var localization = require('./localization.js');
 
 module.exports = function(grunt) {
     'use strict';
@@ -47,10 +50,10 @@ module.exports = function(grunt) {
         },
 
         jade: {
-            compile: {
+            default: {
                 options: {
-                    i18n: {
-                        locales: 'locales/*.json'
+                    data: {
+                        _t: localization.getLocalText('en')
                     }
                 },
                 files: [
@@ -62,13 +65,21 @@ module.exports = function(grunt) {
                         ext: '.html'
                     }
                 ]
-            }
-        },
-
-        copy: {
-            localizedPages: {
+            },
+            tw: {
+                options: {
+                    data: {
+                        _t: localization.getLocalText('tw')
+                    }
+                },
                 files: [
-                    {expand: true, cwd: 'en/', src: ['**'], dest: './'}
+                    {
+                        expand: true,
+                        cwd: '.',
+                        src: ['*.jade', '!common/**/*.jade'],
+                        dest: 'tw/',
+                        ext: '.html'
+                    }
                 ]
             }
         },
@@ -83,12 +94,11 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-shell');
-    grunt.loadNpmTasks('grunt-jade-i18n');
 
     // Tasks
-    grunt.registerTask('build:jade', ['jade', 'copy:localizedPages']);
+    grunt.registerTask('build:jade', ['jade']);
     grunt.registerTask('build:less', ['less:production']);
     grunt.registerTask('build', ['build:jade', 'build:less']);
     grunt.registerTask('dev-server', ['shell:launchDevServer']);

@@ -4,6 +4,7 @@ var express = require('express');
 var fs = require('fs');
 var jade = require('jade');
 var path = require('path');
+var localization = require('./localization.js');
 
 var app = express();
 
@@ -33,23 +34,20 @@ app.get(/(.*)/, function(req, res) {
     } else {
         // Find locale file
         var locale = req.query.locale ? req.query.locale : 'en';
-        var localeFilePath = path.join(__dirname, 'locales', locale + '.json');
-        var localeFileExists = fs.existsSync(localeFilePath);
-        if (!localeFileExists) {
+        var _t = localization.getLocalText(locale);
+        if (!_t) {
             console.log('Error      %s', requestPath);
             res.status(500).send('500 No such locale');
             return;
         }
 
-        // Read locale file
-        var localeJSONString = fs.readFileSync(localeFilePath, 'utf8');
-        var localeData = JSON.parse(localeJSONString);
-
         // Read and compile Jade file
         fs.readFile(filePath, 'utf8', function(err, data) {
             if (!err) {
                 console.log('Render     %s', requestPath);
-                res.send(jade.compile(data, {pretty: true, filename: filePath})({$i18n: localeData}));
+
+                var locals = {_t: _t};
+                res.send(jade.compile(data, {pretty: true, filename: filePath})(locals));
             } else {
                 console.log('Error      %s', requestPath);
                 res.status(500).send('500 Error: %s', err);
