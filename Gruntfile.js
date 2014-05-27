@@ -7,6 +7,8 @@ module.exports = function(grunt) {
     'use strict';
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+
         shell: {
             launchDevServer: {
                 options: {
@@ -27,7 +29,7 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: 'static/stylesheets',
-                        src: ['*.less', '!common/**/*.less'],
+                        src: ['**/*.less', '!common/**/*.less'],
                         dest: 'static/stylesheets',
                         ext: '.css'
                     }
@@ -46,7 +48,7 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: '.',
-                        src: ['*.jade', '!common/**/*.jade'],
+                        src: ['**/*.jade', '!common/**/*.jade'],
                         dest: '.',
                         ext: '.html'
                     }
@@ -62,7 +64,7 @@ module.exports = function(grunt) {
                     {
                         expand: true,
                         cwd: '.',
-                        src: ['*.jade', '!common/**/*.jade'],
+                        src: ['**/*.jade', '!common/**/*.jade'],
                         dest: 'tw/',
                         ext: '.html'
                     }
