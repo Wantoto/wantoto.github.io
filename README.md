@@ -1,10 +1,53 @@
-wantoto.com
-========================================================================================================================
+# wantoto.com
 
-You have to install **flask-static-site**, **Flask** and **Frozen-Flask** to edit and deploy.
 
-To deploy, just run `fss build` and then push to github.
+## Build
 
-Run `fss dev_server` to start development server. Please modify only files in **static** and **templates**.
+Install ```node.js``` and ```npm``` first
+ 
+```
+brew install node
+```
 
-Check [flask-static-site](https://bitbucket.org/wantoto/flask-static-site/) for detail.
+
+Then install required modules by ```npm```
+
+```
+npm install
+```
+
+
+## Development
+
+We use [jade](http://jade-lang.com) to compose pages
+
+use "_t" to load translated string, like following
+
+```
+p= _t('translation.key.path', 'DefaultText')
+```
+
+And add strings in ```locales/{en,tw}.json```
+
+
+### Preview 
+
+```
+grunt dev-server
+```
+
+And open ```http://127.0.0.1:8000``` in your browser
+
+
+### Compile LESS when modified
+ 
+```
+grunt watch:less
+```
+
+
+### Build for production
+
+```
+grunt build
+```
