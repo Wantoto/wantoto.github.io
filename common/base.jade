@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title
+            block page-title
+            | Wantoto Inc.
+        block page-stylesheets
+            link(href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css",
+                 rel="stylesheet")
+    body
+        block page-content
+        block page-scripts
+            script(src="//cdnjs.cloudflare.com/ajax/libs/retina.js/1.0.1/retina.min.js", async)
+            script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js")
+            script(src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js")
