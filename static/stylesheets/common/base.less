@@ -1,0 +1,100 @@
+@import "variables";
+
+@primary-color: #197f7f;
+
+body {
+    // fixed-top-navbar
+    padding-top: 70px;
+
+    font-weight: 300;
+}
+
+// Navbar
+.navbar-wtt {
+    @navbar-background: #fff;
+    @navbar-border-color: #ccc;
+    @navbar-height: 60px;
+    @navbar-brand-image-height: 37px;
+    @navbar-opened-menu-background: #ddd;
+
+    border: None;
+    border-bottom: 1px solid @navbar-border-color;
+    background: @navbar-background;
+
+    &.navbar {
+        min-height: @navbar-height;
+    }
+
+    @media (min-width: @screen-sm-min) {
+        border-bottom: None;
+        padding-top: 20px;
+    }
+
+    .navbar-toggle {
+        margin: 0;
+        border-radius: 0;
+        height: @navbar-height;
+        width: @navbar-height;
+
+        // Opened Style
+        border-left: 1px solid @navbar-opened-menu-background;
+        background: @navbar-opened-menu-background;
+
+        .icon-bar {
+            margin-left: 5px;
+            width: 30px;
+            height: 3px;
+
+            & + .icon-bar {
+                margin-top: 5px;
+            }
+
+            // Opened Style
+            background-color: darken(@navbar-opened-menu-background, 50%);
+        }
+
+        // Closed Style
+        &.collapsed {
+            border-left-color: @navbar-border-color;
+            background: @navbar-background;
+
+            .icon-bar {
+               background-color: darken(@navbar-border-color, 20%);
+            }
+        }
+    }
+
+    .navbar-brand {
+        margin-left: 15px;
+        padding: (@navbar-height - @navbar-brand-image-height)/2 0;
+        height: @navbar-height;
+    }
+
+    .navbar-collapse {
+        // Opened Style
+        background: @navbar-opened-menu-background;
+        @media (min-width: @screen-sm-min) {
+            background: @navbar-background;
+        }
+
+        .navbar-nav {
+            > li {
+                height: @navbar-height;
+                > a {
+                    color: #222;
+                    text-transform: uppercase;
+                    font-weight: 400;
+
+                    &:hover {
+                        color: @primary-color;
+                        background: None;
+                    }
+
+                    @media (min-width: @screen-md-min) {
+                        padding: (@navbar-height - 20)/2 20px;
+                    }
+                }
+            }
+        }
+    }
+}

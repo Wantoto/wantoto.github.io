@@ -17,21 +17,7 @@ module.exports = function(grunt) {
         },
 
         less: {
-            development: {
-                options: {
-                    ieCompat: false
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'static/stylesheets',
-                        src: ['*.less', '!common/**/*.less'],
-                        dest: 'static/stylesheets',
-                        ext: '.css'
-                    }
-                ]
-            },
-            production: {
+            default: {
                 options: {
                     compress: true,
                     cleancss: true,
@@ -85,9 +71,9 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            stylesheets: {
+            less: {
                 files: ['static/stylesheets/**/*.less'],
-                tasks: ['less:development']
+                tasks: ['less']
             }
         }
     });
@@ -98,8 +84,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
 
     // Tasks
-    grunt.registerTask('build:jade', ['jade']);
-    grunt.registerTask('build:less', ['less:production']);
-    grunt.registerTask('build', ['build:jade', 'build:less']);
+    grunt.registerTask('build', ['jade', 'less']);
     grunt.registerTask('dev-server', ['shell:launchDevServer']);
 };
