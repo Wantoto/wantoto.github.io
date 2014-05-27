@@ -1,1 +1,72 @@
-body{padding-top:70px;font-weight:300}.navbar-wtt{border:None;border-bottom:1px solid #ccc;background:#fff}.navbar-wtt.navbar{min-height:60px}@media (min-width:768px){.navbar-wtt{border-bottom:None;padding-top:20px}}.navbar-wtt .navbar-toggle{margin:0;border-radius:0;height:60px;width:60px;border-left:1px solid #ddd;background:#ddd}.navbar-wtt .navbar-toggle .icon-bar{margin-left:5px;width:30px;height:3px;background-color:#5e5e5e}.navbar-wtt .navbar-toggle .icon-bar+.icon-bar{margin-top:5px}.navbar-wtt .navbar-toggle.collapsed{border-left-color:#ccc;background:#fff}.navbar-wtt .navbar-toggle.collapsed .icon-bar{background-color:#999}.navbar-wtt .navbar-brand{margin-left:15px;padding:11.5px 0;height:60px}.navbar-wtt .navbar-collapse{background:#ddd}@media (min-width:768px){.navbar-wtt .navbar-collapse{background:#fff}}.navbar-wtt .navbar-collapse .navbar-nav>li{height:60px}.navbar-wtt .navbar-collapse .navbar-nav>li>a{color:#222;text-transform:uppercase;font-weight:400}.navbar-wtt .navbar-collapse .navbar-nav>li>a:hover{color:#197f7f;background:None}@media (min-width:992px){.navbar-wtt .navbar-collapse .navbar-nav>li>a{padding:20px}}
+body {
+  padding-top: 70px;
+  font-weight: 300;
+}
+.navbar-wtt {
+  border: None;
+  border-bottom: 1px solid #cccccc;
+  background: #ffffff;
+}
+.navbar-wtt.navbar {
+  min-height: 60px;
+}
+@media (min-width: 768px) {
+  .navbar-wtt {
+    border-bottom: None;
+    padding-top: 20px;
+  }
+}
+.navbar-wtt .navbar-toggle {
+  margin: 0;
+  border-radius: 0;
+  height: 60px;
+  width: 60px;
+  border-left: 1px solid #dddddd;
+  background: #dddddd;
+}
+.navbar-wtt .navbar-toggle .icon-bar {
+  margin-left: 5px;
+  width: 30px;
+  height: 3px;
+  background-color: #5e5e5e;
+}
+.navbar-wtt .navbar-toggle .icon-bar + .icon-bar {
+  margin-top: 5px;
+}
+.navbar-wtt .navbar-toggle.collapsed {
+  border-left-color: #cccccc;
+  background: #ffffff;
+}
+.navbar-wtt .navbar-toggle.collapsed .icon-bar {
+  background-color: #999999;
+}
+.navbar-wtt .navbar-brand {
+  margin-left: 15px;
+  padding: 11.5px 0;
+  height: 60px;
+}
+.navbar-wtt .navbar-collapse {
+  background: #dddddd;
+}
+@media (min-width: 768px) {
+  .navbar-wtt .navbar-collapse {
+    background: #ffffff;
+  }
+}
+.navbar-wtt .navbar-collapse .navbar-nav > li {
+  height: 60px;
+}
+.navbar-wtt .navbar-collapse .navbar-nav > li > a {
+  color: #222;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.navbar-wtt .navbar-collapse .navbar-nav > li > a:hover {
+  color: #197f7f;
+  background: None;
+}
+@media (min-width: 992px) {
+  .navbar-wtt .navbar-collapse .navbar-nav > li > a {
+    padding: 20px 20px;
+  }
+}

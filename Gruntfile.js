@@ -38,11 +38,19 @@ module.exports = function(grunt) {
                 dest: 'static/stylesheets',
                 ext: '.css'
             }
+        },
+
+        watch: {
+            stylesheets: {
+                files: ['static/stylesheets/**/*.less'],
+                tasks: ['less:development']
+            }
         }
     });
 
-    grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-shell');
 
     // Tasks
     grunt.registerTask('dev-server', ['shell:launchDevServer']);
