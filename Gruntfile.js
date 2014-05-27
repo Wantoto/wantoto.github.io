@@ -18,12 +18,15 @@ module.exports = function(grunt) {
                 options: {
                     ieCompat: false
                 },
-
-                expand: true,
-                cwd: 'static/stylesheets',
-                src: ['*.less', '!common/**/*.less'],
-                dest: 'static/stylesheets',
-                ext: '.css'
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'static/stylesheets',
+                        src: ['*.less', '!common/**/*.less'],
+                        dest: 'static/stylesheets',
+                        ext: '.css'
+                    }
+                ]
             },
             production: {
                 options: {
@@ -31,12 +34,42 @@ module.exports = function(grunt) {
                     cleancss: true,
                     ieCompat: false
                 },
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'static/stylesheets',
+                        src: ['*.less', '!common/**/*.less'],
+                        dest: 'static/stylesheets',
+                        ext: '.css'
+                    }
+                ]
+            }
+        },
 
-                expand: true,
-                cwd: 'static/stylesheets',
-                src: ['*.less', '!common/**/*.less'],
-                dest: 'static/stylesheets',
-                ext: '.css'
+        jade: {
+            compile: {
+                options: {
+                    i18n: {
+                        locales: 'locales/*.json'
+                    }
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: '.',
+                        src: ['*.jade', '!common/**/*.jade'],
+                        dest: '.',
+                        ext: '.html'
+                    }
+                ]
+            }
+        },
+
+        copy: {
+            localizedPages: {
+                files: [
+                    {expand: true, cwd: 'en/', src: ['**'], dest: './'}
+                ]
             }
         },
 
@@ -50,8 +83,13 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-jade-i18n');
 
     // Tasks
+    grunt.registerTask('build:jade', ['jade', 'copy:localizedPages']);
+    grunt.registerTask('build:less', ['less:production']);
+    grunt.registerTask('build', ['build:jade', 'build:less']);
     grunt.registerTask('dev-server', ['shell:launchDevServer']);
 };

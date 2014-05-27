@@ -31,10 +31,25 @@ app.get(/(.*)/, function(req, res) {
         console.log('Load       %s', requestPath);
         res.sendfile(filePath);
     } else {
+        // Find locale file
+        var locale = req.query.locale ? req.query.locale : 'en';
+        var localeFilePath = path.join(__dirname, 'locales', locale + '.json');
+        var localeFileExists = fs.existsSync(localeFilePath);
+        if (!localeFileExists) {
+            console.log('Error      %s', requestPath);
+            res.status(500).send('500 No such locale');
+            return;
+        }
+
+        // Read locale file
+        var localeJSONString = fs.readFileSync(localeFilePath, 'utf8');
+        var localeData = JSON.parse(localeJSONString);
+
+        // Read and compile Jade file
         fs.readFile(filePath, 'utf8', function(err, data) {
             if (!err) {
                 console.log('Render     %s', requestPath);
-                res.send(jade.compile(data, {pretty: true, filename: filePath})());
+                res.send(jade.compile(data, {pretty: true, filename: filePath})({$i18n: localeData}));
             } else {
                 console.log('Error      %s', requestPath);
                 res.status(500).send('500 Error: %s', err);

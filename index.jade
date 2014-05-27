@@ -18,6 +18,6 @@ block page-content
                     a.navbar-brand(href='/'): img(src="/static/images/logo-sm.png")
                 div#page-main-navbar.collapse.navbar-collapse
                     ul.nav.navbar-nav.navbar-right
-                        li: a(href='/apps') Apps
-                        li: a(href='/jobs') Jobs
-                        li: a(href='/about') About
+                        li: a(href='/apps')= $i18n.navigation.apps
+                        li: a(href='/jobs')= $i18n.navigation.jobs
+                        li: a(href='/about')= $i18n.navigation.about
