@@ -86,4 +86,5 @@ module.exports = function(grunt) {
     // Tasks
     grunt.registerTask('build', ['jade', 'less']);
     grunt.registerTask('dev-server', ['shell:launchDevServer']);
+    grunt.registerTask('default', ['build']);
 };
