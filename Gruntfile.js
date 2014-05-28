@@ -76,6 +76,12 @@ module.exports = function(grunt) {
             less: {
                 files: ['static/stylesheets/**/*.less'],
                 tasks: ['less']
+            },
+            livereload: {
+                files: ['**/*.jade', 'locales/*.json', 'static/**/*.*', '!static/**/*.css'],
+                options: {
+                    livereload: true
+                }
             }
         }
     });
