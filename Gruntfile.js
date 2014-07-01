@@ -1,4 +1,5 @@
 var localization = require('./localization.js');
+var scriptFinder = require('./script-finder.js');
 
 module.exports = function(grunt) {
     'use strict';
@@ -13,12 +14,6 @@ module.exports = function(grunt) {
                     stdout: true
                 },
                 command: 'node app.js'
-            },
-            deploy: {
-                options: {
-                    stdout: true
-                },
-                command: 'git add --all .; git commit -am "Deploy"; git pull; git push'
             }
         },
 
@@ -94,7 +89,8 @@ module.exports = function(grunt) {
         jade: {
             options: {
                 data: {
-                    _t: localization.getLocalText('en')
+                    _t: localization.getLocalText('en'),
+                    scriptFinder: scriptFinder.scriptFinder(true)
                 }
             },
             default: {
@@ -107,7 +103,8 @@ module.exports = function(grunt) {
             tw: {
                 options: {
                     data: {
-                        _t: localization.getLocalText('tw')
+                        _t: localization.getLocalText('tw'),
+                        scriptFinder: scriptFinder.scriptFinder(true)
                     }
                 },
                 files: [{
@@ -171,8 +168,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build:js', ['jshint', 'uglify']);
     grunt.registerTask('build', ['build:js', 'less:prod', 'jade']);
-
-    grunt.registerTask('deploy', ['build', 'shell:deploy']);
 
     grunt.registerTask('default', ['build']);
 };

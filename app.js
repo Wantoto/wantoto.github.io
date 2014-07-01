@@ -3,6 +3,7 @@ var fs = require('fs');
 var jade = require('jade');
 var path = require('path');
 var localization = require('./localization.js');
+var scriptFinder = require('./script-finder.js');
 
 var app = express();
 
@@ -53,7 +54,8 @@ app.get(/(.*)/, function(req, res) {
 
                 console.log('Local-Dev: Render     %s', requestPath);
                 var locals = {
-                    _t: _t
+                    _t: _t,
+                    scriptFinder: scriptFinder.scriptFinder(true)
                 };
                 res.send(jade.compile(template, {pretty: true, filename: filePath})(locals));
             }
