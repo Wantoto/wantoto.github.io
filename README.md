@@ -24,61 +24,31 @@ Then run ```npm install``` at root directory of this project to install other re
 
 
 
+### Command
+
+#### ```grunt dev```
+
+This command is a watcher which provides:
+
+- Automatic LESS compilation
+- Dynamically render Jade template into static pages (for development, not really generate files)
+- [Live-reload](http://livereload.com)
+
+It helps you when developing webpages. (You don't have to compile Jade and LESS before viewing pages)
+Run it and open [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+
+#### ```grunt build```
+
+This commands does:
+
+- Use [jshint](http://www.jshint.com) to check syntax of Javascript files
+- Minify Javascript files by [uglify-js](https://github.com/mishoo/UglifyJS2)
+- Compile LESS files into CSS stylesheets
+- Compile Jade template into HTML pages (static pages, not dynamic views in ```cloud``` folder)
 
 
 
+### Deploy
 
-
-
-
-
-
-
-## Build
-
-Install ```node.js``` and ```npm``` first
- 
-```
-brew install node
-```
-Then install required modules by ```npm```
-
-```
-npm install
-```
-
-
-## Development
-
-We use [jade](http://jade-lang.com) to compose pages
-
-use "_t" to load translated string, like following
-
-```
-p= _t('translation.key.path', 'DefaultText')
-```
-
-And add strings in ```locales/{en,tw}.json```
-
-
-### Preview 
-
-```
-grunt dev-server
-```
-
-And open ```http://127.0.0.1:8000``` in your browser
-
-
-### Compile LESS when modified
- 
-```
-grunt watch:less
-```
-
-
-### Build for production
-
-```
-grunt build
-```
+Use ```git push``` directly. Remember to run ```grunt build``` before deploy.
