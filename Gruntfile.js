@@ -18,7 +18,7 @@ module.exports = function(grunt) {
                 options: {
                     stdout: true
                 },
-                command: 'git add --all . && git commit -am "Deploy" && git pull && git push'
+                command: 'git add --all .; git commit -am "Deploy"; git pull; git push'
             }
         },
 
