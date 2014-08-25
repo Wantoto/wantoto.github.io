@@ -45,6 +45,17 @@ module.exports = function(grunt) {
             }
         },
 
+        imagemin: {
+            default: {
+                files: [{
+                    expand: true,
+                    cwd: 'static/images',
+                    src: ['**/*.{png,jpg,jpeg,gif,svg}'],
+                    dest: 'static/images'
+                }]
+            }
+        },
+
         jshint: {
             options: {
                 jshintrc: true
@@ -159,15 +170,19 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-newer');
 
     // Declare task alias
+    grunt.registerTask('minify-image', ['newer:imagemin:default']);
+
     grunt.registerTask('dev-server', ['shell:launchDevServer']);
     grunt.registerTask('dev', ['concurrent:dev']);
 
     grunt.registerTask('build:js', ['jshint', 'uglify']);
-    grunt.registerTask('build', ['build:js', 'less:prod', 'jade']);
+    grunt.registerTask('build', ['build:js', 'less:prod', 'minify-image', 'jade']);
 
     grunt.registerTask('default', ['build']);
 };
