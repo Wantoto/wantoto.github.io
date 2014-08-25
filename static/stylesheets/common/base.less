@@ -1,12 +1,47 @@
 @import "variables";
 
 @primary-color: #197f7f;
+@page-footer-height: 40px;
+@page-footer-vertical-padding: 10px;
+@page-footer-final-height: 40px + 2 * @page-footer-vertical-padding;
+
+html {
+    // Bottom Footer
+    height: 100%;
+}
 
 body {
     font-weight: 300;
 
     // Top-Fixed navbar
     padding-top: 70px;
+
+    // Bottom Footer
+    height: 100%;
+}
+#page-wrapper {
+    // Bottom Footer
+    min-height: 100%;
+    position: relative;
+}
+#page-header {
+}
+#page-footer {
+    font-size: 0.85em;
+    background: #ccc;
+
+    padding-top: @page-footer-vertical-padding;
+    padding-bottom: @page-footer-vertical-padding;
+
+    // Bottom Footer
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: @page-footer-height;
+}
+#page-content {
+    // Bottom Footer
+    padding-bottom: @page-footer-final-height + 20px;
 }
 
 // Navbar
