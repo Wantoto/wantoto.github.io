@@ -5,5 +5,9 @@ block append page-stylesheets
     link(href="/static/stylesheets/index.css", rel="stylesheet")
 
 block page-content
-    div.container
-        h1 Index
+    div.container-fluid
+        div.row: div.col-xs-12#home-landing
+            img(src="/static/images/home-landing-xs.png")
+        div.row: div.col-xs-12
+            h1 Wantoto Inc.
+            p Description

@@ -130,7 +130,7 @@ module.exports = function(grunt) {
 
         watch: {
             less: {
-                files: '/static/stylesheets/**/*.less',
+                files: 'static/stylesheets/**/*.less',
                 tasks: ['less:dev']
             },
             jade: {
@@ -147,7 +147,7 @@ module.exports = function(grunt) {
             },
             livereload: {
                 // Changes of less should be delegated to changes of css.
-                files: ['**/*.html', 'static/**.*', '!static/**/*.less'],
+                files: ['**/*.html', 'static/**/*.*', '!static/**/*.less'],
                 options: {
                     livereload: true
                 }
@@ -156,7 +156,7 @@ module.exports = function(grunt) {
 
         concurrent: {
             'dev': {
-                tasks: ['watch:less', 'watch:livereload', 'dev-server'],
+                tasks: ['watch:jade', 'watch:less', 'watch:livereload', 'dev-server'],
                 options: {
                     logConcurrentOutput: true
                 }
