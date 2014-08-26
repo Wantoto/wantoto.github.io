@@ -35,7 +35,7 @@ app.get(/(.*)/, function(req, res) {
         // Send file directly
         console.log('Local-Dev: Load       %s', requestPath);
         //noinspection JSCheckFunctionSignatures
-        res.sendfile(filePath);
+        res.sendFile(filePath);
     } else {
         // Render by jade template engine
         fs.readFile(filePath, 'utf8', function (err, template) {

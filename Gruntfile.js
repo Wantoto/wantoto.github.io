@@ -45,6 +45,18 @@ module.exports = function(grunt) {
             }
         },
 
+        autoprefixer: {
+            options: {
+                cascade: false
+            },
+            default: {
+                expand: true,
+                flatten: true,
+                src: 'static/stylesheets/**/*.css',
+                dest: 'static/stylesheets/'
+            }
+        },
+
         imagemin: {
             default: {
                 files: [{
@@ -107,7 +119,7 @@ module.exports = function(grunt) {
             default: {
                 expand: true,
                 cwd: '.',
-                src: ['**/*.jade', '!common/**/*.jade', '!tw/**/*.jade'],
+                src: ['**/*.jade', '!common/**/*.jade', '!tw/**/*.jade', '!node_modules/**/*.*'],
                 dest: '.',
                 ext: '.html'
             },
@@ -121,7 +133,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'tw',
-                    src: ['**/*.jade', '!common/**/*.jade'],
+                    src: ['**/*.jade', '!common/**/*.jade', '!node_modules/**/*.*'],
                     dest: 'tw',
                     ext: '.html'
                 }]
@@ -131,7 +143,7 @@ module.exports = function(grunt) {
         watch: {
             less: {
                 files: 'static/stylesheets/**/*.less',
-                tasks: ['less:dev']
+                tasks: ['less:dev', 'autoprefixer']
             },
             jade: {
                 files: '**/*.jade',
@@ -147,7 +159,7 @@ module.exports = function(grunt) {
             },
             livereload: {
                 // Changes of less should be delegated to changes of css.
-                files: ['**/*.html', 'static/**/*.*', '!static/**/*.less'],
+                files: ['**/*.html', 'static/**/*.*', '!static/**/*.less', '!node_modules/**/*.*'],
                 options: {
                     livereload: true
                 }
@@ -174,6 +186,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-newer');
+    grunt.loadNpmTasks('grunt-autoprefixer');
 
     // Declare task alias
     grunt.registerTask('minify-image', ['newer:imagemin:default']);
@@ -182,7 +195,10 @@ module.exports = function(grunt) {
     grunt.registerTask('dev', ['concurrent:dev']);
 
     grunt.registerTask('build:js', ['jshint', 'uglify']);
-    grunt.registerTask('build', ['build:js', 'less:prod', 'minify-image', 'jade']);
+    grunt.registerTask('build:css', ['less:prod', 'autoprefixer']);
+    grunt.registerTask('build:image', ['minify-image']);
+    grunt.registerTask('build:html', ['jade']);
+    grunt.registerTask('build', ['build:js', 'build:css', 'build:image', 'build:html']);
 
     grunt.registerTask('default', ['build']);
 };

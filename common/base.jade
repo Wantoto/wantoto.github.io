@@ -31,9 +31,13 @@ html
                                 +navigation-links()
             section#page-content
                 block page-content
-            footer#page-footer.container
+            footer#page-footer.container-fluid
                 block page-footer
+                    div.row: div.col-xs-12
+                        ul#footer-nav.list-inline
+                            +navigation-links()
                     div.row: div.col-xs-12 Copyright &copy; 2014 Wantoto Inc. All Rights Reserved
         block page-scripts-body
             script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js")
             script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
+            script: include ../static/scripts/_load_ga.min.js
