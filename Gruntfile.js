@@ -1,6 +1,8 @@
 var localization = require('./localization.js');
 var scriptFinder = require('./script-finder.js');
 
+var defaultLang = 'tw';
+
 module.exports = function(grunt) {
     'use strict';
 
@@ -110,31 +112,48 @@ module.exports = function(grunt) {
         },
 
         jade: {
-            options: {
-                data: {
-                    _t: localization.getLocalText('en'),
-                    scriptFinder: scriptFinder.scriptFinder(true)
-                }
-            },
             default: {
-                expand: true,
-                cwd: '.',
-                src: ['**/*.jade', '!common/**/*.jade', '!tw/**/*.jade', '!node_modules/**/*.*'],
-                dest: '.',
-                ext: '.html'
-            },
-            tw: {
                 options: {
                     data: {
-                        _t: localization.getLocalText('tw'),
+                        localText: localization.localText(defaultLang),
                         scriptFinder: scriptFinder.scriptFinder(true)
                     }
                 },
                 files: [{
                     expand: true,
-                    cwd: 'tw',
+                    cwd: '.',
+                    src: ['**/*.jade', '!common/**/*.jade', '!node_modules/**/*.*'],
+                    dest: '.',
+                    ext: '.html'
+                }]
+            },
+            tw: {
+                options: {
+                    data: {
+                        localText: localization.localText('tw'),
+                        scriptFinder: scriptFinder.scriptFinder(true)
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: '.',
                     src: ['**/*.jade', '!common/**/*.jade', '!node_modules/**/*.*'],
                     dest: 'tw',
+                    ext: '.html'
+                }]
+            },
+            en: {
+                options: {
+                    data: {
+                        localText: localization.localText('en'),
+                        scriptFinder: scriptFinder.scriptFinder(true)
+                    }
+                },
+                files: [{
+                    expand: true,
+                    cwd: '.',
+                    src: ['**/*.jade', '!common/**/*.jade', '!node_modules/**/*.*'],
+                    dest: 'en',
                     ext: '.html'
                 }]
             }

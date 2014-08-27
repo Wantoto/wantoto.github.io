@@ -44,9 +44,10 @@ app.get(/(.*)/, function(req, res) {
                 res.status(500).send('500 Error: %s', err);
             } else {
                 // Find locale
-                var locale = req.query.locale ? req.query.locale : 'en';
-                var _t = localization.getLocalText(locale);
-                if (!_t) {
+                //noinspection JSUnresolvedVariable
+                var locale = req.query.lang ? req.query.lang : 'tw';
+                var localText = localization.localText(locale);
+                if (!localText) {
                     console.log('Error      %s', requestPath);
                     res.status(500).send('500 No such locale');
                     return;
@@ -54,7 +55,7 @@ app.get(/(.*)/, function(req, res) {
 
                 console.log('Local-Dev: Render     %s', requestPath);
                 var locals = {
-                    _t: _t,
+                    localText: localText,
                     scriptFinder: scriptFinder.scriptFinder(true)
                 };
                 res.send(jade.compile(template, {pretty: true, filename: filePath})(locals));

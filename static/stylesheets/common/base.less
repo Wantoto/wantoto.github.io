@@ -1,7 +1,7 @@
 @import "variables";
 
 @primary-color: #197f7f;
-@page-footer-height: 100px;
+@page-footer-height: 95px;
 @page-footer-vertical-padding: 10px;
 @page-footer-final-height: 40px + 2 * @page-footer-vertical-padding;
 
@@ -27,8 +27,9 @@ body {
 #page-header {
 }
 #page-footer {
-    font-size: 0.85em;
+    font-size: 0.8em;
     background: #333;
+    color: #ddd;
 
     padding-top: @page-footer-vertical-padding;
     padding-bottom: @page-footer-vertical-padding;
@@ -50,7 +51,7 @@ body {
     @navbar-border-color: #ccc;
     @navbar-height: 60px;
     @navbar-brand-image-height: 30px;
-    @navbar-opened-menu-background: #eee;
+    @navbar-opened-menu-background: #e3e3e3;
 
     border: None;
     border-bottom: 1px solid @navbar-border-color;
@@ -110,7 +111,8 @@ body {
 
         .navbar-nav {
             > li {
-                height: @navbar-height;
+                @navbar-li-height: 50px;
+                height: @navbar-li-height;
                 > a {
                     color: #222;
                     text-transform: uppercase;
@@ -121,9 +123,7 @@ body {
                         background: None;
                     }
 
-                    @media (min-width: @screen-md-min) {
-                        padding: (@navbar-height - 20)/2 20px;
-                    }
+                    padding: (@navbar-li-height - 20)/2 20px;
                 }
             }
         }
@@ -132,6 +132,13 @@ body {
 
 // Footer nav
 #footer-nav {
-    margin-top: 5px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    font-size: 1.2em;
+    li {
+        > a {
+            color: lighten(@primary-color, 10%);
+        }
+    }
 }
