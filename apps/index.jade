@@ -1,1 +1,15 @@
 extend ../common/base
+
+block append page-stylesheets
+    link(href="/static/stylesheets/apps.css", rel="stylesheet")
+
+block prepend page-title
+    | #{localText.pageTitle.apps} |&nbsp;
+
+block page-content
+    section#main-content.container
+        div.row: div.col-xs-12
+            div.page-header
+                h1 #{localText.pageTitle.apps}
+        div.row: div.col-xs-12
+            p apps

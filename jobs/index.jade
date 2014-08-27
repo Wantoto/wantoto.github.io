@@ -1,1 +1,18 @@
 extend ../common/base
+
+block prepend page-title
+    | #{localText.pageTitle.jobs} |&nbsp;
+
+block append page-stylesheets
+    link(href="/static/stylesheets/jobs.css", rel="stylesheet")
+
+block page-content
+    section#main-content.container
+        div.row: div.col-xs-12
+            div.page-header
+                h1 #{localText.pageTitle.jobs}
+        div.row: div.col-xs-12
+            if localText.info.lang === 'en'
+                include:markdown ../locales/jobs.en.md
+            else if localText.info.lang === 'tw'
+                include:markdown ../locales/jobs.tw.md

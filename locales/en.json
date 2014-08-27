@@ -6,5 +6,10 @@
         "apps": "Apps",
         "jobs": "Jobs",
         "about": "About"
+    },
+    "pageTitle": {
+        "apps": "Apps",
+        "jobs": "Jobs",
+        "about": "About us"
     }
 }

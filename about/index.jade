@@ -1,10 +1,18 @@
 extend ../common/base
 
+block prepend page-title
+    | #{localText.pageTitle.about} |&nbsp;
+
 block append page-stylesheets
     link(href="/static/stylesheets/about.css", rel="stylesheet")
 
 block page-content
-    if localText.info.lang === 'en'
-        div: include ../locales/about.en.md
-    else
-        div: include ../locales/about.tw.md
+    section#main-content.container
+        div.row: div.col-xs-12
+            div.page-header
+                h1 #{localText.pageTitle.about}
+        div.row: div.col-xs-12
+            if localText.info.lang === 'en'
+                include:markdown ../locales/about.en.md
+            else if localText.info.lang === 'tw'
+                include:markdown ../locales/about.tw.md
