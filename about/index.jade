@@ -1,7 +1,7 @@
 extend ../common/base
 
 block prepend page-title
-    | #{localText.pageTitle.about} |&nbsp;
+    | #{locale.get('pageTitle.about')} |&nbsp;
 
 block append page-stylesheets
     link(href="/static/stylesheets/about.css", rel="stylesheet")
@@ -10,9 +10,9 @@ block page-content
     section#main-content.container
         div.row: div.col-xs-12
             div.page-header
-                h1 #{localText.pageTitle.about}
+                h1 #{locale.get('pageTitle.about')}
         div.row: div.col-xs-12
-            if localText.info.lang === 'en'
+            if locale.locale === 'en'
                 include:markdown ../locales/about.en.md
-            else if localText.info.lang === 'tw'
+            else if locale.locale === 'tw'
                 include:markdown ../locales/about.tw.md

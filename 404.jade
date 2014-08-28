@@ -1,0 +1,10 @@
+extend common/base
+
+block append page-stylesheets
+    link(href="/static/stylesheets/base.css", rel="stylesheet")
+
+block page-content
+    .container: .row: .col-xs-12
+        h1 404 Not Found
+            br
+            small: a(href='#{locale.localizedPath("/")}') Back to Home

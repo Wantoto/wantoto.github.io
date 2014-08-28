@@ -1,12 +1,33 @@
-/*jshint node:true*/
-
 var fs = require('fs');
 var path = require('path');
+var _ = require('lodash');
 
-exports = exports||{};
+var DEFAULT_LANG = 'tw';
 
-function localText(locale) {
+function _get(object, property, defaultValue) {
     'use strict';
+    return _.has(object, property)?_.result(object, property):defaultValue;
+}
+
+function _getKeyPath(object, keyPath) {
+    'use strict';
+
+    if (!object || !keyPath) {
+        return undefined;
+    }
+
+    var kpc = _.isArray(keyPath)?keyPath:keyPath.split('.');
+    var r = _get(object, kpc[0]);
+    return (r && kpc.length > 1)?_getKeyPath(r, kpc.slice(1)):r;
+}
+
+function _localText(locale) {
+    'use strict';
+
+    if (typeof locale === 'undefined') {
+        locale = DEFAULT_LANG;
+    }
+
     // Find locale file
     var localeFilePath = path.join(__dirname, 'locales', locale + '.json');
     var localeFileExists = fs.existsSync(localeFilePath);
@@ -19,4 +40,40 @@ function localText(locale) {
     return JSON.parse(localeJSONString);
 }
 
-exports.localText = localText;
+function _localizedPath(_localPath, _lang) {
+    'use strict';
+
+    if (_lang === DEFAULT_LANG) {
+        return _localPath;
+    } else {
+        var pathComponents = _localPath.split(path.sep);
+        pathComponents.splice(1, 0, _lang);
+        return pathComponents.join(path.sep);
+    }
+}
+
+function locale(_locale) {
+    'use strict';
+
+    if (_locale !== 'tw' && _locale !== 'en') {
+        _locale = DEFAULT_LANG;
+    }
+
+    var object = {
+        locale: _locale,
+        _localText: _localText(_locale)
+    };
+
+    object.localizedPath = function(_path) {
+        return _localizedPath(_path, this.locale);
+    };
+
+    object.get = function(keyPath) {
+        return _getKeyPath(this._localText, keyPath);
+    };
+
+    return object;
+}
+
+module.exports.locale = locale;
+module.exports.DEFAULT_LANG = DEFAULT_LANG;

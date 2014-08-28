@@ -5,7 +5,8 @@
     "navigation": {
         "apps": "Apps",
         "jobs": "人才招募",
-        "about": "關於我們"
+        "about": "關於我們",
+        "anotherLang": ["English", "/en/"]
     },
     "pageTitle": {
         "apps": "Apps",

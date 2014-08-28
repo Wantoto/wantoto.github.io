@@ -5,7 +5,8 @@
     "navigation": {
         "apps": "Apps",
         "jobs": "Jobs",
-        "about": "About"
+        "about": "About",
+        "anotherLang": ["正體中文", "/"]
     },
     "pageTitle": {
         "apps": "Apps",

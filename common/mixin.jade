@@ -1,4 +1,5 @@
 mixin navigation-links
-    li: a(href='/apps')= localText.navigation.apps
-    li: a(href='/jobs')= localText.navigation.jobs
-    li: a(href='/about')= localText.navigation.about
+    li: a(href=locale.localizedPath('/apps'))= locale.get('navigation.apps')
+    li: a(href=locale.localizedPath('/jobs'))= locale.get('navigation.jobs')
+    li: a(href=locale.localizedPath('/about'))= locale.get('navigation.about')
+    li: a(href=locale.get('navigation.anotherLang.1'))= locale.get('navigation.anotherLang.0')

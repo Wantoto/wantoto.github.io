@@ -1,13 +1,19 @@
 var localization = require('./localization.js');
 var scriptFinder = require('./script-finder.js');
 
-var defaultLang = 'tw';
+function _getJadeData(lang) {
+    'use strict';
+    return {
+        defaultLang: localization.DEFAULT_LANG,
+        scriptFinder: scriptFinder.scriptFinder(true),
+        locale: localization.locale(lang)
+    };
+}
 
 module.exports = function(grunt) {
     'use strict';
 
-    //noinspection JSUnresolvedFunction
-    grunt.initConfig({
+    var config = {
         pkg: grunt.file.readJSON('package.json'),
 
         shell: {
@@ -114,10 +120,7 @@ module.exports = function(grunt) {
         jade: {
             default: {
                 options: {
-                    data: {
-                        localText: localization.localText(defaultLang),
-                        scriptFinder: scriptFinder.scriptFinder(true)
-                    }
+                    data: _getJadeData()
                 },
                 files: [{
                     expand: true,
@@ -129,10 +132,7 @@ module.exports = function(grunt) {
             },
             tw: {
                 options: {
-                    data: {
-                        localText: localization.localText('tw'),
-                        scriptFinder: scriptFinder.scriptFinder(true)
-                    }
+                    data: _getJadeData('tw')
                 },
                 files: [{
                     expand: true,
@@ -144,10 +144,7 @@ module.exports = function(grunt) {
             },
             en: {
                 options: {
-                    data: {
-                        localText: localization.localText('en'),
-                        scriptFinder: scriptFinder.scriptFinder(true)
-                    }
+                    data: _getJadeData('en')
                 },
                 files: [{
                     expand: true,
@@ -193,7 +190,11 @@ module.exports = function(grunt) {
                 }
             }
         }
-    });
+    };
+    delete config.jade[localization.DEFAULT_LANG];
+
+    //noinspection JSUnresolvedFunction
+    grunt.initConfig(config);
 
     // Register modules
     grunt.loadNpmTasks('grunt-contrib-jshint');

@@ -1,61 +1,85 @@
-@import "variables";
+@import "common/variables";
 
 @primary-color: #197f7f;
-@page-footer-height: 95px;
-@page-footer-vertical-padding: 10px;
-@page-footer-final-height: 40px + 2 * @page-footer-vertical-padding;
 
+@page-footer-height: 150px;
+@page-footer-sm-height: 96px;
+@page-footer-lg-height: 120px;
+@page-footer-vertical-padding: 10px;
+.page-footer-final-height(@height) {
+    @page-footer-final-height: @height + 2 * @page-footer-vertical-padding + 20px;
+}
+
+// Base
 html {
     // Bottom Footer
     height: 100%;
 }
-
 body {
     font-weight: 300;
-
-    // Top-Fixed navbar
-    padding-top: 70px;
 
     // Bottom Footer
     height: 100%;
 }
-#page-wrapper {
-    // Bottom Footer
-    min-height: 100%;
-    position: relative;
-}
-#page-header {
-}
-#page-footer {
-    font-size: 0.8em;
-    background: #333;
-    color: #ddd;
+#page {
+    &-wrapper {
+        // Bottom Footer
+        min-height: 100%;
+        position: relative;
+    }
+    &-header {
+    }
+    &-footer {
+        font-size: 0.8em;
+        background: #333;
+        color: #ddd;
 
-    padding-top: @page-footer-vertical-padding;
-    padding-bottom: @page-footer-vertical-padding;
+        padding-top: @page-footer-vertical-padding;
+        padding-bottom: @page-footer-vertical-padding;
 
-    // Bottom Footer
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: @page-footer-height;
-}
-#page-content {
-    // Bottom Footer
-    padding-bottom: @page-footer-final-height + 20px;
+        // Bottom Footer
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: @page-footer-height;
+        @media (min-width: @screen-sm-min) {
+            height: @page-footer-sm-height;
+        }
+        @media (min-width: @screen-lg-min) {
+            height: @page-footer-lg-height;
+            padding-top: @page-footer-lg-height - @page-footer-sm-height;
+        }
+    }
+    &-content {
+        .page-footer-final-height(@page-footer-height);
+        // Bottom Footer
+        padding-bottom: @page-footer-final-height;
+        @media (min-width: @screen-sm-min) {
+            .page-footer-final-height(@page-footer-sm-height);
+            padding-bottom: @page-footer-final-height;
+        }
+        @media (min-width: @screen-lg-min) {
+            .page-footer-final-height(@page-footer-lg-height);
+            padding-bottom: @page-footer-final-height;
+        }
+
+        min-height: 640px;
+    }
 }
 
 // Navbar
+@navbar-height: 60px;
+@navbar-top-sm-padding: 20px;
 .navbar-wtt {
     @navbar-background: #fff;
     @navbar-border-color: #ccc;
-    @navbar-height: 60px;
     @navbar-brand-image-height: 30px;
     @navbar-opened-menu-background: #efefef;
 
     border: None;
     border-bottom: 1px solid @navbar-border-color;
     background: @navbar-background;
+    margin-bottom: 10px;
 
     &.navbar {
         min-height: @navbar-height;
@@ -63,7 +87,7 @@ body {
 
     @media (min-width: @screen-sm-min) {
         border-bottom: None;
-        padding-top: 20px;
+        padding-top: @navbar-top-sm-padding;
     }
 
     .navbar-toggle {
@@ -111,7 +135,7 @@ body {
 
         .navbar-nav {
             > li {
-                @navbar-li-height: 50px;
+                @navbar-li-height: 60px;
                 height: @navbar-li-height;
                 > a {
                     color: #222;
@@ -132,14 +156,34 @@ body {
 
 // Footer nav
 #footer-nav {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
 
     font-size: 1.2em;
+    @media (min-width: @screen-sm-min) {
+        text-align: right;
+    }
+
     li {
         > a {
             color: lighten(@primary-color, 10%);
         }
+    }
+}
+#footer-logo {
+    @image-height: 30px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    @media (min-width: @screen-sm-min) {
+        @vertical-margin: (@page-footer-sm-height - 2*@page-footer-vertical-padding - @image-height)/2;
+        margin-top: @vertical-margin - 5px;
+    }
+}
+#footer-copyright {
+    margin: 10px 0;
+    @media (min-width: @screen-sm-min) {
+        text-align: right;
     }
 }
 
