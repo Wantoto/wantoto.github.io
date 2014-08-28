@@ -52,3 +52,23 @@ This commands does:
 ### Deploy
 
 Use ```git push``` directly. Remember to run ```grunt build``` before deploy.
+
+
+
+## Folder Structure
+
+### Dynamic Content
+
+- ```locales```: Translation content
+- ```.jshintrc```: jsHint settings
+- ```app.js```: Local dev express app
+- ```Gruntfile.js```: Grunt settings
+- ```localization.js```: Translation Utils
+- ```package.json```: node packages
+- ```script-finder.js```: Minified script locator
+
+### Static Content
+
+- ```static```: Images, Scripts, and Stylesheets
+- ```en```: English translation
+- ```common```: Files that won't be compiled into static pages/stylesheets
