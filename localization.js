@@ -6,6 +6,7 @@ var DEFAULT_LANG = 'tw';
 
 function _get(object, property, defaultValue) {
     'use strict';
+    //noinspection JSUnresolvedFunction
     return _.has(object, property)?_.result(object, property):defaultValue;
 }
 

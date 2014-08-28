@@ -14,7 +14,6 @@ function renderTemplate(filePath, requestPath, lang, res) {
             console.log('Local-Dev: Error      %s', requestPath);
             res.status(500).send('500 Error: %s', err);
         } else {
-            // Find locale
             console.log('Local-Dev: Render     %s', requestPath);
             var locals = {
                 defaultLang: localization.DEFAULT_LANG,
@@ -30,6 +29,7 @@ function renderTemplate(filePath, requestPath, lang, res) {
 app.get(/(.*)/, function(req, res) {
     'use strict';
 
+    // Find locale and reset path
     var lang = localization.DEFAULT_LANG;
     var requestPath = req.params[0];
     var pathComponents = requestPath.split(path.sep);
@@ -40,17 +40,13 @@ app.get(/(.*)/, function(req, res) {
     }
 
     // Add index.html if necessary
-    //noinspection JSUnresolvedVariable
     var filePath = path.join(__dirname, requestPath);
-
-    //noinspection JSUnresolvedFunction
     if (fs.existsSync(filePath) && fs.lstatSync(filePath).isDirectory()) {
         filePath = path.join(filePath, 'index.html');
     }
 
     // Check file existence
     var jadeFilePath = filePath.replace(/\.html$/, '.jade');
-    //noinspection JSUnresolvedFunction
     var fileExists = (fs.existsSync(jadeFilePath) && (filePath = jadeFilePath)) || fs.existsSync(filePath);
     if (!fileExists) {
         console.log('Local-Dev: Not Found  %s', requestPath);
@@ -70,6 +66,5 @@ app.get(/(.*)/, function(req, res) {
 
 app.listen(8000, '127.0.0.1', function() {
     'use strict';
-    //noinspection JSUnresolvedVariable,JSUnresolvedFunction
     console.log('Listening %s on port %d', this.address().address, this.address().port);
 });
